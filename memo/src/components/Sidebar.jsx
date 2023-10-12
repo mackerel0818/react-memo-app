@@ -17,19 +17,19 @@ export default function Sidebar() {
             className="w-full p-2 mb-4 bg-gray-100 dark:bg-gray-700 rounded"
           />
           <div className="flex flex-col">
-            <Link to="/memos" className="font-semibold py-2">
+            <Link to="/notebooks" className="font-semibold py-2">
               📒 전체 노트
             </Link>
-            <Link to="/memos" className="font-semibold py-2">
+            <Link to="/notebooks" className="font-semibold py-2">
               📒 중요한 노트
             </Link>
-            <Link to="/memos" className="font-semibold py-2">
+            <Link to="/notebooks" className="font-semibold py-2">
               📒 강의 노트
             </Link>
-            <Link to="/memos" className="font-semibold py-2">
+            <Link to="/notebooks" className="font-semibold py-2">
               📒 간단 메모
             </Link>
-            <Link to="/memos" className="font-semibold py-2">
+            <Link to="/notebooks" className="font-semibold py-2">
               📒 아이디어
             </Link>
           </div>

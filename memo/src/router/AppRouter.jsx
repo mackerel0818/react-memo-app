@@ -6,15 +6,17 @@ import MemoDetail from "../pages/MemoDetail";
 import MemoList from "../pages/MemoList";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
+import Home from "../pages/Home";
 
 const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/memos" element={<MemoList />} />
-        <Route path="/memo/:id" element={<MemoDetail />} />
+        <Route path="/notebooks" element={<MemoList />} />
+        <Route path="/note/:id" element={<MemoDetail />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
