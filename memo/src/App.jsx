@@ -1,5 +1,7 @@
+import AppRouter from "./router/AppRouter";
+
 function App() {
-  return <div className="App">init</div>;
+  return <AppRouter />;
 }
 
 export default App;
