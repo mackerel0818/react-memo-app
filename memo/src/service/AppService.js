@@ -1,5 +1,6 @@
 import { API_BASE_URL } from "../app-config";
 const ACCESS_TOKEN = "ACCESS_TOKEN";
+const USER_ID = "USER_ID";
 
 export async function call(api, method, request) {
   let headers = new Headers({
@@ -32,7 +33,7 @@ export async function call(api, method, request) {
       console.log(error.status);
       console.log("Ooops!");
       if (error.status === 403) {
-        window.location.href = "/notebooks";
+        window.location.href = "/notebooks/all";
       }
       return Promise.reject(error);
     });
@@ -42,7 +43,8 @@ export function signin(userDTO) {
   return call("/auth/signin", "POST", userDTO).then((response) => {
     if (response.token) {
       localStorage.setItem(ACCESS_TOKEN, response.token);
-      window.location.href = "/notebooks";
+      localStorage.setItem(USER_ID, response.id);
+      window.location.href = "/notebooks/all";
     }
   });
 }
@@ -68,4 +70,40 @@ export function signup(userDTO) {
 export function signout() {
   localStorage.setItem(ACCESS_TOKEN, null);
   window.location.href = "/";
+}
+
+export function getUserInfo() {
+  const userId = localStorage.getItem(USER_ID);
+  if (!userId) {
+    return Promise.reject("User ID not found");
+  }
+  return call(`/auth/${userId}`, "GET")
+    .then((response) => {
+      if (response.id) {
+        return response;
+      }
+    })
+    .catch((error) => {
+      console.error("Failed to get user info:", error);
+    });
+}
+
+export function updateUserInfo(userId, updatedUser) {
+  return call(`/auth/${userId}`, "PUT", updatedUser)
+    .then((response) => {
+      console.log("User info updated successfully");
+    })
+    .catch((error) => {
+      console.error("Failed to update user info:", error);
+    });
+}
+
+export function deleteUser(userId) {
+  return call(`/auth/${userId}`, "DELETE")
+    .then(() => {
+      console.log("User deleted successfully");
+    })
+    .catch((error) => {
+      console.error("Failed to delete user:", error);
+    });
 }
