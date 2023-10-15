@@ -6,9 +6,11 @@ export const useTheme = () => {
   return useContext(ThemeContext);
 };
 
-export const ThemeProvider = ({ children }) => {
+export const ThemeProvider = ({ children, userId }) => {
+  const userDarkModeKey = `darkMode_${userId}`;
+
   const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("darkMode") === "true"
+    localStorage.getItem(userDarkModeKey) === "true"
   );
 
   useEffect(() => {
@@ -18,8 +20,8 @@ export const ThemeProvider = ({ children }) => {
       document.body.classList.remove("dark");
     }
 
-    localStorage.setItem("darkMode", darkMode);
-  }, [darkMode]);
+    localStorage.setItem(userDarkModeKey, darkMode);
+  }, [darkMode, userDarkModeKey]);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);

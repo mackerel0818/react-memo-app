@@ -6,8 +6,9 @@ import { ThemeProvider } from "./context/ThemeContext";
 const queryClient = new QueryClient();
 
 export default function App() {
+  const userId = localStorage.getItem("USER_ID");
   return (
-    <ThemeProvider>
+    <ThemeProvider userId={userId}>
       <QueryClientProvider client={queryClient}>
         <AppRouter />
       </QueryClientProvider>
