@@ -32,7 +32,6 @@ export default function UserInfo({ setShowModal }) {
   });
 
   useEffect(() => {
-    // Initialize the updatedUser state with user data once it is available
     if (user) {
       setUpdatedUser({
         email: user.email,
