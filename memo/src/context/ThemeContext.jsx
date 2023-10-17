@@ -25,6 +25,7 @@ export const ThemeProvider = ({ children, userId }) => {
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
+    window.location.reload();
   };
 
   return (

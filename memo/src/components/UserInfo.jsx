@@ -52,7 +52,7 @@ export default function UserInfo({ setShowModal }) {
         <div className="w-full max-w-lg p-6 mx-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
           <div className="flex items-center justify-between border-b dark:border-gray-600 pb-4">
             <BsPersonCircle className="text-6xl text-black dark:text-white" />
-            <h3 className="flex items-center text-5xl font-bold uppercase font-['Poppins'] text-black dark:text-white ml-4 cursor-pointer">
+            <h3 className="flex items-center text-5xl font-bold uppercase font-['Poppins'] text-black dark:text-white ml-4">
               My profile
             </h3>
             <button
