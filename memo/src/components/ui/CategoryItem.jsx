@@ -1,10 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export default function CategoryItem({ label }) {
+export default function CategoryItem({ id, label }) {
+  const navigate = useNavigate();
   return (
-    <div className="hover:cursor-pointer dark:text-white">
-      <Link to="/notebooks/all">{label}</Link>
+    <div className="hover:cursor-pointer dark:text-white mb-2">
+      <button
+        onClick={() => {
+          navigate(`/notebooks/${id}`, { state: { id } });
+        }}
+      >
+        {label}
+      </button>
     </div>
   );
 }

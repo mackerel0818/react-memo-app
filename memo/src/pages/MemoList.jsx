@@ -1,21 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import { useQuery } from "@tanstack/react-query";
 import { call } from "../service/AppService";
 import ContentsViewer from "../components/ContentsViewer";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function MemoList() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const id = location.state && location.state.id;
+  const url = id === "all" || id === null ? "/memos" : `/memos/${id}`;
 
   const {
     isLoading,
     error,
     data: memos,
-  } = useQuery(["memos"], async () => {
-    const response = await call("/memos", "GET");
+    refetch,
+  } = useQuery(["memos", url], async () => {
+    const response = await call(url, "GET");
     return response.data;
   });
+
+  useEffect(() => {
+    refetch();
+  }, [id, refetch]);
 
   return (
     <div className="flex">
@@ -23,7 +31,7 @@ export default function MemoList() {
       <div className="w-full dark:bg-gray-950 p-4 h-screen overflow-auto">
         {isLoading && <p>Loading memos...</p>}
         {error && <p>Error: {error.message}</p>}
-        {memos && (
+        {memos && memos.length !== 0 ? (
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {memos.map((memo) => (
               <button
@@ -44,6 +52,10 @@ export default function MemoList() {
               </button>
             ))}
           </ul>
+        ) : (
+          <p className="text-xl pt-5 dark:text-white">
+            ❌❌❌노트가 없습니다!❌❌❌
+          </p>
         )}
       </div>
     </div>

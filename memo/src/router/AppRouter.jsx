@@ -19,6 +19,7 @@ const AppRouter = () => {
         <Route path="/note/add" element={<AddMemo />} />
         <Route path="/note/:id" element={<MemoDetail />} />
         <Route path="/notebooks/all" element={<MemoList />} />
+        <Route path="/notebooks/:id" element={<MemoList />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
