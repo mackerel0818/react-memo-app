@@ -8,6 +8,7 @@ import Signup from "../pages/Signup";
 import Home from "../pages/Home";
 import AddMemo from "../pages/AddMemo";
 import MemoDetail from "../pages/MemoDetail";
+import SearchResult from "../pages/SearchResult";
 
 const AppRouter = () => {
   return (
@@ -20,6 +21,7 @@ const AppRouter = () => {
         <Route path="/note/:id" element={<MemoDetail />} />
         <Route path="/notebooks/all" element={<MemoList />} />
         <Route path="/notebooks/:id" element={<MemoList />} />
+        <Route path="/search" element={<SearchResult />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

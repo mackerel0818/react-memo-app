@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import CategoryItem from "./ui/CategoryItem";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { call } from "../service/AppService";
+import Search from "./Search";
 
 export default function Sidebar() {
   const [showModal, setShowModal] = useState(false);
@@ -36,8 +37,15 @@ export default function Sidebar() {
 
   const addCategory = () => {
     if (newCategory.trim() !== "") {
-      categoryMutation.mutate({ name: newCategory });
-      setNewCategory("");
+      if (
+        categories &&
+        !categories.some((category) => category.name === newCategory)
+      ) {
+        categoryMutation.mutate({ name: newCategory });
+        setNewCategory("");
+      } else {
+        alert("이미 존재하는 카테고리입니다.");
+      }
     }
   };
 
@@ -45,15 +53,11 @@ export default function Sidebar() {
     <div className="dark:bg-gray-950">
       <div
         id="sidebar"
-        className="flex flex-col w-64 h-screen rounded-r-3xl bg-white dark:bg-gray-900 p-4 shrink-0"
+        className="flex flex-col w-64 h-screen rounded-r-3xl border bg-white dark:border-gray-900 dark:bg-gray-900 p-4 shrink-0"
       >
         <div className="flex flex-col justify-between h-full">
           <div className="m-2">
-            <input
-              type="search"
-              placeholder="🔍 search"
-              className="w-full p-2 mb-4 bg-gray-100 dark:text-black rounded"
-            />
+            <Search />
             <div className="flex flex-col">
               <div className="flex items-center mb-2">
                 <input
@@ -61,7 +65,7 @@ export default function Sidebar() {
                   placeholder="새 카테고리"
                   value={newCategory}
                   onChange={(e) => setNewCategory(e.target.value)}
-                  className="w-3/4 p-2 mr-2 bg-gray-100 dark:text-black rounded"
+                  className="w-full p-2 mr-2 bg-gray-100 dark:text-black rounded"
                 />
                 <button onClick={addCategory}>
                   <AiOutlinePlus className="dark:text-white" />

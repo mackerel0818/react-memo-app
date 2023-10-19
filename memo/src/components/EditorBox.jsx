@@ -41,18 +41,19 @@ export default function EditorBox({ memo }) {
     const newMemo = {
       title: title,
       content: markDownContent,
-      categoryId: categoryId, // 선택한 카테고리의 ID 사용
+      categoryId: categoryId,
     };
 
     mutation.mutate(newMemo);
     setSaved(true);
   };
 
-  const updateDefaultMutation = useMutation(
+  const updateMutation = useMutation(
     (updatedMemo) => call("/memos", "PUT", updatedMemo),
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries("/memos");
+      onSuccess: async () => {
+        await queryClient.invalidateQueries("/memos");
+        setSaved(true);
       },
     }
   );
@@ -63,10 +64,9 @@ export default function EditorBox({ memo }) {
       id: memo.id,
       title: title,
       content: markDownContent,
-      categoryId: categoryId, // 선택한 카테고리의 ID 사용
+      categoryId: categoryId,
     };
-    updateDefaultMutation.mutate(updatedMemo);
-    setSaved(true);
+    updateMutation.mutate(updatedMemo);
   };
 
   const handleChange = (e) => {
