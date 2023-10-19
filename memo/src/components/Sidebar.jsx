@@ -45,6 +45,7 @@ export default function Sidebar() {
         setNewCategory("");
       } else {
         alert("이미 존재하는 카테고리입니다.");
+        setNewCategory("");
       }
     }
   };
