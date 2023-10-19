@@ -44,8 +44,8 @@ export function signin(userDTO) {
     if (response.token) {
       localStorage.setItem(ACCESS_TOKEN, response.token);
       localStorage.setItem(USER_ID, response.id);
-      window.location.href = "/notebooks/all";
     }
+    window.location.href = "/notebooks/all";
   });
 }
 

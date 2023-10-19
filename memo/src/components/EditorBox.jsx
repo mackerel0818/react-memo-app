@@ -99,11 +99,11 @@ export default function EditorBox({ memo }) {
           />
         </div>
         <div className="flex items-center">
-          <label className="mr-1 dark:text-white" htmlFor="category">
+          <label className="mr-2 dark:text-white" htmlFor="category">
             카테고리 :
           </label>
           <select
-            className="rounded dark:text-black"
+            className="rounded border p-2 dark:text-black"
             name="category"
             value={categoryId}
             onChange={handleCategoryChange}
