@@ -99,7 +99,7 @@ export function updateUserInfo(userId, updatedUser) {
 }
 
 export function deleteUser(userId) {
-  return call(`/auth/${userId}`, "DELETE")
+  return call(`/auth/delete/${userId}`, "DELETE")
     .then(() => {
       console.log("User deleted successfully");
     })
